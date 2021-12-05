@@ -10,37 +10,37 @@ const dummy = [
   {
     id: '1',
     title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.jpg',
+    src: '/assets/image/profile.png',
     href: '/',
   },
   {
     id: '2',
     title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.jpg',
+    src: '/assets/image/profile.png',
     href: '/',
   },
   {
     id: '3',
     title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.jpg',
+    src: '/assets/image/profile.png',
     href: '/',
   },
   {
     id: '4',
     title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.jpg',
+    src: '/assets/image/profile.png',
     href: '/',
   },
   {
     id: '5',
     title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.jpg',
+    src: '/assets/image/profile.png',
     href: '/',
   },
   {
     id: '6',
     title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.jpg',
+    src: '/assets/image/profile.png',
     href: '/',
   },
 ];

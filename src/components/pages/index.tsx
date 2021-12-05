@@ -6,6 +6,7 @@ import { FC, useState } from 'react';
 import { SwiperSlide } from 'swiper/react';
 
 import Arrow from 'components/icons/Arrow';
+import AboutSection from 'components/templates/AboutSection/';
 import Container from 'components/templates/Container/';
 import HomeSection, { Section } from 'components/templates/HomeSection/';
 import ArticleCard from 'components/ui/ArticleCard/';
@@ -52,83 +53,50 @@ const Home: FC<Props> = ({
         zIndex={1}
         handleInView={handleInView}
       >
-        <Image
-          src="/assets/image/profile.jpg"
-          alt=""
-          layout="fill"
-          objectFit="cover"
-        />
-        <Box
-          display={{ md: 'flex' }}
-          alignItems={{ md: 'center' }}
-          pt={10}
-          pb={6}
-          minHeight="100vh"
-          color="common.white"
-          bgcolor="rgba(21,21,21,0.70)"
-          sx={{
-            backdropFilter: 'blur(40px) brightness(60%)',
-          }}
-        >
-          <Container>
-            <Box
-              sx={(theme: Theme) => ({
-                [theme.breakpoints.up('md')]: {
-                  display: 'grid',
-                  alignItems: 'center',
-                  gap: '0 16px',
-                  gridTemplate: `
-            'hdg profile' auto
-            'hdg btn' auto / 1fr 1fr
-            `,
+        <AboutSection>
+          <Box mb={8} gridArea="hdg">
+            <CategoryHeading titleEng="About" titleJpn="南進之介" />
+          </Box>
+          <Box
+            mb={4}
+            mx={{ xs: 'auto', md: 0 }}
+            maxWidth={{ xs: 600, md: 'none' }}
+            gridArea="profile"
+          >
+            <Profile
+              profileItems={[
+                {
+                  id: 0,
+                  title: 'Name',
+                  description: 'Shinnosuke Minami',
                 },
-              })}
-            >
-              <Box mb={{ xs: 8, md: 0 }} gridArea="hdg">
-                <CategoryHeading titleEng="About" titleJpn="南進之介" />
-              </Box>
-              <Box
-                mb={4}
-                mx={{ xs: 'auto', md: 0 }}
-                maxWidth={{ xs: 600, md: 'none' }}
-                gridArea="profile"
+                {
+                  id: 1,
+                  title: 'Age',
+                  description: 29,
+                },
+              ]}
+            />
+          </Box>
+          <Box textAlign="center" gridArea="btn">
+            <Link href="/about" passHref>
+              <Button
+                component="a"
+                color="inherit"
+                endIcon={<Arrow />}
+                sx={{
+                  '&:hover, &:focus': {
+                    borderColor: 'common.white',
+                    backgroundColor: 'common.white',
+                    color: 'primary.main',
+                  },
+                }}
               >
-                <Profile
-                  profileItems={[
-                    {
-                      id: 0,
-                      title: 'Name',
-                      description: 'Shinnosuke Minami',
-                    },
-                    {
-                      id: 1,
-                      title: 'Age',
-                      description: 29,
-                    },
-                  ]}
-                />
-              </Box>
-              <Box textAlign="center" gridArea="btn">
-                <Link href="/about" passHref>
-                  <Button
-                    component="a"
-                    color="inherit"
-                    endIcon={<Arrow />}
-                    sx={{
-                      '&:hover, &:focus': {
-                        borderColor: 'common.white',
-                        backgroundColor: 'common.white',
-                        color: 'primary.main',
-                      },
-                    }}
-                  >
-                    About
-                  </Button>
-                </Link>
-              </Box>
-            </Box>
-          </Container>
-        </Box>
+                About
+              </Button>
+            </Link>
+          </Box>
+        </AboutSection>
       </HomeSection>
       <HomeSection
         section="blog"
@@ -171,7 +139,7 @@ const Home: FC<Props> = ({
                       description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
                       date={new Date()}
                       category="Category"
-                      src="/assets/image/profile.jpg"
+                      src="/assets/image/profile.png"
                       href="test"
                       disabled={!isActive}
                     />
@@ -184,7 +152,7 @@ const Home: FC<Props> = ({
                       description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
                       date={new Date()}
                       category="Category"
-                      src="/assets/image/profile.jpg"
+                      src="/assets/image/profile.png"
                       href="test"
                       disabled={!isActive}
                     />
@@ -197,7 +165,7 @@ const Home: FC<Props> = ({
                       description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
                       date={new Date()}
                       category="Category"
-                      src="/assets/image/profile.jpg"
+                      src="/assets/image/profile.png"
                       href="test"
                       disabled={!isActive}
                     />
@@ -219,6 +187,7 @@ const Home: FC<Props> = ({
         section="works"
         isFilterBlur={false}
         zIndex={3}
+        isLastSection
         handleInView={handleInView}
       >
         <Box
@@ -257,37 +226,37 @@ const Home: FC<Props> = ({
                     {
                       id: '1',
                       title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.jpg',
+                      src: '/assets/image/profile.png',
                       href: '/',
                     },
                     {
                       id: '2',
                       title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.jpg',
+                      src: '/assets/image/profile.png',
                       href: '/',
                     },
                     {
                       id: '3',
                       title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.jpg',
+                      src: '/assets/image/profile.png',
                       href: '/',
                     },
                     {
                       id: '4',
                       title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.jpg',
+                      src: '/assets/image/profile.png',
                       href: '/',
                     },
                     {
                       id: '5',
                       title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.jpg',
+                      src: '/assets/image/profile.png',
                       href: '/',
                     },
                     {
                       id: '6',
                       title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.jpg',
+                      src: '/assets/image/profile.png',
                       href: '/',
                     },
                   ]}

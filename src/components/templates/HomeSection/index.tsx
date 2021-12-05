@@ -10,6 +10,7 @@ type Props = {
   section?: Section;
   zIndex: number;
   isFilterBlur: boolean;
+  isLastSection?: boolean;
   handleInView?: (section: Section, isFilterBlur: boolean) => void;
 };
 
@@ -18,6 +19,7 @@ const HomeSection: FC<Props> = ({
   section,
   zIndex,
   isFilterBlur,
+  isLastSection = false,
   handleInView,
 }) => {
   return (
@@ -25,6 +27,7 @@ const HomeSection: FC<Props> = ({
       component="section"
       position="sticky"
       top={0}
+      pb={isLastSection ? 0 : 25}
       zIndex={zIndex}
       boxShadow={(theme: Theme) => theme.shadows[24]}
     >

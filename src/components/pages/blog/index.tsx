@@ -1,5 +1,4 @@
-import { Search } from '@mui/icons-material';
-import { Box, TextField, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import Head from 'next/head';
 import { FC } from 'react';
 
@@ -24,20 +23,6 @@ const Blog: FC = ({}) => {
           <Box mb={10}>
             <CategoryHeading titleEng="Blog" titleJpn="記録" />
           </Box>
-          <Box component="form" mb={6} ml="auto" width="min(100%, 632px)">
-            <Box display="flex" gap={2} mb={2}>
-              <TextField fullWidth variant="standard" label="カテゴリ" />
-              <TextField fullWidth variant="standard" label="日付" />
-            </Box>
-            <Box display="flex" justifyContent="flex-end" gap={1}>
-              <Button variant="text" type="reset">
-                クリア
-              </Button>
-              <Button type="submit" startIcon={<Search />}>
-                検索
-              </Button>
-            </Box>
-          </Box>
           <Box
             component="ul"
             display="grid"
@@ -50,7 +35,7 @@ const Blog: FC = ({}) => {
                 description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
                 date={new Date()}
                 category="Category"
-                src="/assets/image/profile.jpg"
+                src="/assets/image/profile.png"
                 href="test"
               />
             </Box>
@@ -60,7 +45,7 @@ const Blog: FC = ({}) => {
                 description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
                 date={new Date()}
                 category="Category"
-                src="/assets/image/profile.jpg"
+                src="/assets/image/profile.png"
                 href="test"
               />
             </Box>
@@ -70,7 +55,7 @@ const Blog: FC = ({}) => {
                 description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
                 date={new Date()}
                 category="Category"
-                src="/assets/image/profile.jpg"
+                src="/assets/image/profile.png"
                 href="test"
               />
             </Box>
