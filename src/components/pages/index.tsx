@@ -37,7 +37,7 @@ const Home: FC<Props> = ({
         <meta name="description" content="南進之介のWebサイト" />
       </Head>
       <HomeSection isFilterBlur={isInViewAbout} zIndex={0}>
-        <Box minHeight="100vh" bgcolor="common.black">
+        <Box position="relative" minHeight="100vh" bgcolor="common.black">
           <Image
             src="/assets/image/mv.jpg"
             alt=""
