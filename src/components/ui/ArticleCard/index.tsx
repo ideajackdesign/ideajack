@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import TypographyRowControl from 'components/ui/TypographyRowControl/';
-import filterDate from 'helpers/filterDate';
+import { filterDate } from 'helpers/filterDate';
 
 type Props = {
   title: string;

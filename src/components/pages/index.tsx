@@ -15,7 +15,7 @@ import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
 import { Blogs } from 'domains/microCMS/models/blog';
-import filterDate from 'helpers/filterDate';
+import { filterDateToDirectory } from 'helpers/filterDate';
 
 import 'swiper/css';
 
@@ -35,8 +35,6 @@ const Home: FC<Props> = ({
   isInViewWorks,
   handleInView,
 }) => {
-  console.log(blogs);
-
   return (
     <>
       <Head>
@@ -148,9 +146,10 @@ const Home: FC<Props> = ({
                         date={b.publishedAt}
                         category={b.category[0]}
                         src={b.thumbnail.url}
-                        href={`/blog/${filterDate({
+                        href={`/blog/${filterDateToDirectory({
                           date: b.publishedAt,
-                        }).replaceAll('.', '')}`}
+                          withTime: true,
+                        })}`}
                         disabled={!isActive}
                       />
                     )}

@@ -5,8 +5,12 @@ import { FC } from 'react';
 import Container from 'components/templates/Container/';
 import ArticleCard from 'components/ui/ArticleCard/';
 import CategoryHeading from 'components/ui/CategoryHeading/';
+import { Blogs } from 'domains/microCMS/models/blog';
+import { filterDateToDirectory } from 'helpers/filterDate';
+import useBlogs from 'hooks/useBlogs';
 
-const Blog: FC = ({}) => {
+type Props = { blogs: Blogs };
+const Blog: FC<Props> = ({ blogs }) => {
   return (
     <>
       <Head>
@@ -29,36 +33,21 @@ const Blog: FC = ({}) => {
             gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr' }}
             gap={{ xs: 1, md: 2 }}
           >
-            <Box component="li">
-              <ArticleCard
-                title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                date={new Date()}
-                category="Category"
-                src="/assets/image/profile.png"
-                href="test"
-              />
-            </Box>
-            <Box component="li">
-              <ArticleCard
-                title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                date={new Date()}
-                category="Category"
-                src="/assets/image/profile.png"
-                href="test"
-              />
-            </Box>
-            <Box component="li">
-              <ArticleCard
-                title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                date={new Date()}
-                category="Category"
-                src="/assets/image/profile.png"
-                href="test"
-              />
-            </Box>
+            {blogs.contents.map((b) => (
+              <Box key={b.id} component="li">
+                <ArticleCard
+                  title={b.title}
+                  description="ここのテキストは静的 本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
+                  date={b.publishedAt}
+                  category={b.category[0]}
+                  src={b.thumbnail.url}
+                  href={`/blog/${filterDateToDirectory({
+                    date: b.publishedAt,
+                    withTime: true,
+                  })}`}
+                />
+              </Box>
+            ))}
           </Box>
         </Container>
       </Box>
@@ -66,4 +55,12 @@ const Blog: FC = ({}) => {
   );
 };
 
-export default Blog;
+const EnhancedBlog: FC = () => {
+  const { blogs } = useBlogs();
+
+  if (!blogs) return <></>;
+
+  return <Blog blogs={blogs} />;
+};
+
+export default EnhancedBlog;

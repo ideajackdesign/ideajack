@@ -7,7 +7,7 @@ type Props = {
   withTime?: boolean;
 };
 
-const filterDate = ({ date, withTime = false }: Props): string => {
+export const filterDate = ({ date, withTime = false }: Props): string => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
@@ -17,4 +17,9 @@ const filterDate = ({ date, withTime = false }: Props): string => {
     .format(withTime ? 'YYYY.MM.DD HH:mm:ss' : 'YYYY.MM.DD');
 };
 
-export default filterDate;
+export const filterDateToDirectory = ({
+  date,
+  withTime = false,
+}: Props): string => {
+  return filterDate({ date, withTime }).replaceAll(/[\.\s:]/gu, '');
+};
