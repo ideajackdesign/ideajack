@@ -83,8 +83,8 @@ const AboutSection: FC = ({ children }) => {
                 <Image
                   src="/assets/image/profile.png"
                   alt=""
-                  width="1269"
-                  height="1350"
+                  width="700"
+                  height="700"
                 />
               </Box>
             </Box>
