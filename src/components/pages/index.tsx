@@ -14,10 +14,14 @@ import CategoryHeading from 'components/ui/CategoryHeading/';
 import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
+import { Blogs } from 'domains/microCMS/models/blog';
+import filterDate from 'helpers/filterDate';
 
 import 'swiper/css';
 
-type Props = {
+type StaticProps = { blogs: Blogs };
+
+type Props = StaticProps & {
   isInViewAbout: boolean;
   isInViewBlog: boolean;
   isInViewWorks: boolean;
@@ -25,11 +29,14 @@ type Props = {
 };
 
 const Home: FC<Props> = ({
+  blogs,
   isInViewAbout,
   isInViewBlog,
   isInViewWorks,
   handleInView,
 }) => {
+  console.log(blogs);
+
   return (
     <>
       <Head>
@@ -132,45 +139,23 @@ const Home: FC<Props> = ({
             </Box>
             <Box mb={4} gridArea="slider">
               <SwiperWrapper>
-                <SwiperSlide tag="li">
-                  {({ isActive }) => (
-                    <ArticleCard
-                      title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                      description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                      date={new Date()}
-                      category="Category"
-                      src="/assets/image/profile.png"
-                      href="test"
-                      disabled={!isActive}
-                    />
-                  )}
-                </SwiperSlide>
-                <SwiperSlide tag="li">
-                  {({ isActive }) => (
-                    <ArticleCard
-                      title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                      description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                      date={new Date()}
-                      category="Category"
-                      src="/assets/image/profile.png"
-                      href="test"
-                      disabled={!isActive}
-                    />
-                  )}
-                </SwiperSlide>
-                <SwiperSlide tag="li">
-                  {({ isActive }) => (
-                    <ArticleCard
-                      title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                      description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                      date={new Date()}
-                      category="Category"
-                      src="/assets/image/profile.png"
-                      href="test"
-                      disabled={!isActive}
-                    />
-                  )}
-                </SwiperSlide>
+                {blogs.contents.map((b) => (
+                  <SwiperSlide key={b.id} tag="li">
+                    {({ isActive }) => (
+                      <ArticleCard
+                        title={b.title}
+                        description="ここのテキストは静的 本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
+                        date={b.publishedAt}
+                        category={b.category[0]}
+                        src={b.thumbnail.url}
+                        href={`/blog/${filterDate({
+                          date: b.publishedAt,
+                        }).replaceAll('.', '')}`}
+                        disabled={!isActive}
+                      />
+                    )}
+                  </SwiperSlide>
+                ))}
               </SwiperWrapper>
             </Box>
             <Box px={1} textAlign="center" gridArea="btn">
@@ -277,7 +262,7 @@ const Home: FC<Props> = ({
   );
 };
 
-const EnhancedHome: FC = () => {
+const EnhancedHome: FC<StaticProps> = ({ blogs }) => {
   const [isInViewAbout, setIsInViewAbout] = useState(false);
   const [isInViewBlog, setIsInViewBlog] = useState(false);
   const [isInViewWorks, setIsInViewWorks] = useState(false);
@@ -299,7 +284,9 @@ const EnhancedHome: FC = () => {
   };
 
   return (
-    <Home {...{ isInViewAbout, isInViewBlog, isInViewWorks, handleInView }} />
+    <Home
+      {...{ blogs, isInViewAbout, isInViewBlog, isInViewWorks, handleInView }}
+    />
   );
 };
 
