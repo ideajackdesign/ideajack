@@ -41,7 +41,11 @@ const Home: FC<Props> = ({
         <meta name="description" content="南進之介のWebサイト" />
       </Head>
       <HomeSection isFilterBlur={isInViewAbout} zIndex={0}>
-        <Box position="relative" minHeight="100vh" bgcolor="common.black">
+        <Box
+          position="relative"
+          minHeight="calc(100vh - env(safe-area-inset-bottom))"
+          bgcolor="common.black"
+        >
           <Image
             src="/assets/image/mv.jpg"
             alt=""
@@ -167,7 +171,6 @@ const Home: FC<Props> = ({
         section="works"
         isFilterBlur={false}
         zIndex={3}
-        isLastSection
         handleInView={handleInView}
       >
         <Box
