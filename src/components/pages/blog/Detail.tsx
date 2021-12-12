@@ -31,7 +31,7 @@ const Detail: FC<Props> = ({ blog }) => {
           </Container>
         </Box>
       </Hidden>
-      <Box component="article" pb={10} bgcolor="common.white">
+      <Box component="article" pb={15} bgcolor="common.white">
         <Box mb={{ xs: 1, md: 5 }}>
           <BlogHeading
             title={blog.title}

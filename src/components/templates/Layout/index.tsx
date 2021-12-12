@@ -10,7 +10,7 @@ type Props = {
 
 const Layout: FC<Props> = ({ children, currentCategory }) => {
   return (
-    <Box display="flex" flexDirection="column" minHeight="100vh">
+    <Box>
       <Hidden mdDown>
         <Box
           component="header"
@@ -31,9 +31,7 @@ const Layout: FC<Props> = ({ children, currentCategory }) => {
           </Container>
         </Box>
       </Hidden>
-      <Box component="main" flex="1 1 auto">
-        {children}
-      </Box>
+      <Box component="main">{children}</Box>
       <Hidden mdUp>
         <Box
           position="fixed"

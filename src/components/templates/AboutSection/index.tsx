@@ -9,6 +9,7 @@ const AboutSection: FC = ({ children }) => {
     <Box
       display="flex"
       minHeight="100vh"
+      pb={10}
       bgcolor="common.black"
       overflow="hidden"
     >

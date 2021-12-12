@@ -55,12 +55,7 @@ const Works: FC = ({}) => {
           content="南進之介のWebサイト 写真家としての作品一覧"
         />
       </Head>
-      <Box
-        pt={{ xs: 2, md: 8 }}
-        pb={10}
-        minHeight="100vh"
-        bgcolor="common.white"
-      >
+      <Box pt={{ xs: 2, md: 8 }} pb={15} bgcolor="common.white">
         <Container>
           <Box mb={10}>
             <CategoryHeading titleEng="Works" titleJpn="写真家" />

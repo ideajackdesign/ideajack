@@ -16,12 +16,7 @@ const Blog: FC<Props> = ({ blogs }) => {
         <title>Blog | minami web site</title>
         <meta name="description" content="南進之介のWebサイト ブログ一覧" />
       </Head>
-      <Box
-        pt={{ xs: 2, md: 8 }}
-        pb={10}
-        minHeight="100vh"
-        bgcolor="common.white"
-      >
+      <Box pt={{ xs: 2, md: 8 }} pb={15} bgcolor="common.white">
         <Container>
           <Box mb={10}>
             <CategoryHeading titleEng="Blog" titleJpn="記録" />
