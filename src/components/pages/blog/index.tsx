@@ -6,7 +6,6 @@ import Container from 'components/templates/Container/';
 import ArticleCard from 'components/ui/ArticleCard/';
 import CategoryHeading from 'components/ui/CategoryHeading/';
 import { Blogs } from 'domains/microCMS/models/blog';
-import { filterDateToDirectory } from 'helpers/filterDate';
 import useBlogs from 'hooks/useBlogs';
 
 type Props = { blogs: Blogs };
@@ -41,10 +40,7 @@ const Blog: FC<Props> = ({ blogs }) => {
                   date={b.publishedAt}
                   category={b.category[0]}
                   src={b.thumbnail.url}
-                  href={`/blog/${filterDateToDirectory({
-                    date: b.publishedAt,
-                    withTime: true,
-                  })}`}
+                  href={`/blog/${b.id}`}
                 />
               </Box>
             ))}

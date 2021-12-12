@@ -15,7 +15,6 @@ import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
 import { Blogs } from 'domains/microCMS/models/blog';
-import { filterDateToDirectory } from 'helpers/filterDate';
 
 import 'swiper/css';
 
@@ -146,10 +145,7 @@ const Home: FC<Props> = ({
                         date={b.publishedAt}
                         category={b.category[0]}
                         src={b.thumbnail.url}
-                        href={`/blog/${filterDateToDirectory({
-                          date: b.publishedAt,
-                          withTime: true,
-                        })}`}
+                        href={`/blog/${b.id}`}
                         disabled={!isActive}
                       />
                     )}

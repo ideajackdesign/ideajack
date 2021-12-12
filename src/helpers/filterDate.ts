@@ -16,10 +16,3 @@ export const filterDate = ({ date, withTime = false }: Props): string => {
     .tz('Asia/Tokyo')
     .format(withTime ? 'YYYY.MM.DD HH:mm:ss' : 'YYYY.MM.DD');
 };
-
-export const filterDateToDirectory = ({
-  date,
-  withTime = false,
-}: Props): string => {
-  return filterDate({ date, withTime }).replaceAll(/[\.\s:]/gu, '');
-};
