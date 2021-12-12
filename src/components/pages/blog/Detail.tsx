@@ -1,15 +1,16 @@
-import { Box } from '@mui/material';
+import { Box, Button, Hidden } from '@mui/material';
 import Head from 'next/head';
+import Link from 'next/link';
 import { FC } from 'react';
 
+import ArrowLeft from 'components/icons/ArrowLeft';
 import Container from 'components/templates/Container/';
-import CategoryHeading from 'components/ui/CategoryHeading/';
+import ArticleArea from 'components/ui/ArticleArea/';
+import BlogHeading from 'components/ui/BlogHeading/';
 import { Blog } from 'domains/microCMS/models/blog';
 
 type Props = { blog: Blog };
 const Detail: FC<Props> = ({ blog }) => {
-  console.log(blog);
-
   return (
     <>
       <Head>
@@ -19,11 +20,39 @@ const Detail: FC<Props> = ({ blog }) => {
           content={`南進之介のWebサイト ${blog.title}`}
         />
       </Head>
-      <Box pt={{ xs: 2, md: 8 }} pb={10} bgcolor="common.white">
+      <Hidden mdUp>
+        <Box py={1.5}>
+          <Container>
+            <Link href="/blog" passHref>
+              <Button variant="text" component="a" startIcon={<ArrowLeft />}>
+                Blog
+              </Button>
+            </Link>
+          </Container>
+        </Box>
+      </Hidden>
+      <Box component="article" pb={10} bgcolor="common.white">
+        <Box mb={{ xs: 1, md: 5 }}>
+          <BlogHeading
+            title={blog.title}
+            date={blog.publishedAt}
+            category={blog.category[0]}
+            src={blog.thumbnail.url}
+          />
+        </Box>
         <Container>
-          <Box mb={10}>
-            <CategoryHeading titleEng="Blog" titleJpn="記録" />
+          <Box maxWidth={848} mx="auto" mb={{ md: 8 }}>
+            <ArticleArea content={blog.content} />
           </Box>
+          <Hidden mdDown>
+            <Box textAlign="center">
+              <Link href="/blog" passHref>
+                <Button component="a" startIcon={<ArrowLeft />}>
+                  Blog
+                </Button>
+              </Link>
+            </Box>
+          </Hidden>
         </Container>
       </Box>
     </>
