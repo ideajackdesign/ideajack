@@ -5,47 +5,11 @@ import { FC } from 'react';
 import Container from 'components/templates/Container/';
 import CategoryHeading from 'components/ui/CategoryHeading/';
 import PicCard from 'components/ui/PicCard/';
+import { Work } from 'domains/local/models/works';
 
-const dummy = [
-  {
-    id: '1',
-    title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.png',
-    href: '/',
-  },
-  {
-    id: '2',
-    title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.png',
-    href: '/',
-  },
-  {
-    id: '3',
-    title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.png',
-    href: '/',
-  },
-  {
-    id: '4',
-    title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.png',
-    href: '/',
-  },
-  {
-    id: '5',
-    title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.png',
-    href: '/',
-  },
-  {
-    id: '6',
-    title: 'testこれはdummyダミーテキスト',
-    src: '/assets/image/profile.png',
-    href: '/',
-  },
-];
+type Props = { works: Work[] };
 
-const Works: FC = ({}) => {
+const Works: FC<Props> = ({ works }) => {
   return (
     <>
       <Head>
@@ -66,9 +30,13 @@ const Works: FC = ({}) => {
             gridTemplateColumns="1fr 1fr 1fr"
             gap={{ xs: 0.25, md: 0.5 }}
           >
-            {dummy.map((p) => (
-              <Box key={p.id} component="li">
-                <PicCard title={p.title} src={p.src} href={p.href} />
+            {works.map((w) => (
+              <Box key={w.id} component="li">
+                <PicCard
+                  title={w.title}
+                  src={`/assets/works/${w.id}/image/${w.main}`}
+                  href={`/works/${w.id}`}
+                />
               </Box>
             ))}
           </Box>
