@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { FC, useState } from 'react';
 
@@ -12,6 +12,8 @@ type Props = {
 };
 
 const PicGallery: FC<Props> = ({ pics, selectIndex, handleClick }) => {
+  const theme = useTheme();
+
   return (
     <Box>
       <Box
@@ -37,8 +39,13 @@ const PicGallery: FC<Props> = ({ pics, selectIndex, handleClick }) => {
                 display="block"
                 width="80px"
                 bgcolor="common.black"
+                border={
+                  index === selectIndex
+                    ? `2px solid ${theme.palette.primary.main}`
+                    : ''
+                }
                 aria-label={`写真${index + 1}`}
-                sx={{ aspectRatio: '4/3' }}
+                sx={{ aspectRatio: '4/3', cursor: 'pointer' }}
                 onClick={() => handleClick(index)}
               >
                 <Image src={p.src} alt="" layout="fill" objectFit="contain" />
