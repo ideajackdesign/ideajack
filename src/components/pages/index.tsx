@@ -14,11 +14,12 @@ import CategoryHeading from 'components/ui/CategoryHeading/';
 import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
+import { Work } from 'domains/local/models/works';
 import { Blogs } from 'domains/microCMS/models/blog';
 
 import 'swiper/css';
 
-type StaticProps = { blogs: Blogs };
+type StaticProps = { blogs: Blogs; works: Work[] };
 
 type Props = StaticProps & {
   isInViewAbout: boolean;
@@ -29,11 +30,19 @@ type Props = StaticProps & {
 
 const Home: FC<Props> = ({
   blogs,
+  works,
   isInViewAbout,
   isInViewBlog,
   isInViewWorks,
   handleInView,
 }) => {
+  const pics = works.map((w) => ({
+    id: w.id,
+    title: w.title,
+    src: `/assets/works/${w.id}/image/${w.main}`,
+    href: `/works/${w.id}`,
+  }));
+
   return (
     <>
       <Head>
@@ -204,46 +213,7 @@ const Home: FC<Props> = ({
                 maxWidth={{ xs: 600, md: 'none' }}
                 gridArea="pic"
               >
-                <PicGrid
-                  pics={[
-                    {
-                      id: '1',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '2',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '3',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '4',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '5',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '6',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                  ]}
-                />
+                <PicGrid pics={pics} />
               </Box>
               <Box textAlign="center" gridArea="btn">
                 <Link href="/works" passHref>
@@ -260,7 +230,7 @@ const Home: FC<Props> = ({
   );
 };
 
-const EnhancedHome: FC<StaticProps> = ({ blogs }) => {
+const EnhancedHome: FC<StaticProps> = ({ blogs, works }) => {
   const [isInViewAbout, setIsInViewAbout] = useState(false);
   const [isInViewBlog, setIsInViewBlog] = useState(false);
   const [isInViewWorks, setIsInViewWorks] = useState(false);
@@ -283,7 +253,14 @@ const EnhancedHome: FC<StaticProps> = ({ blogs }) => {
 
   return (
     <Home
-      {...{ blogs, isInViewAbout, isInViewBlog, isInViewWorks, handleInView }}
+      {...{
+        blogs,
+        works,
+        isInViewAbout,
+        isInViewBlog,
+        isInViewWorks,
+        handleInView,
+      }}
     />
   );
 };
