@@ -7,7 +7,7 @@ type Props = {
   withTime?: boolean;
 };
 
-const filterDate = ({ date, withTime = false }: Props): string => {
+export const filterDate = ({ date, withTime = false }: Props): string => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
@@ -16,5 +16,3 @@ const filterDate = ({ date, withTime = false }: Props): string => {
     .tz('Asia/Tokyo')
     .format(withTime ? 'YYYY.MM.DD HH:mm:ss' : 'YYYY.MM.DD');
 };
-
-export default filterDate;

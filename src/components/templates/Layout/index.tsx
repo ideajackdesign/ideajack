@@ -9,12 +9,14 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children, currentCategory }) => {
+  const isBgBlack = ['home', 'about'].includes(currentCategory);
+
   return (
-    <Box display="flex" flexDirection="column" minHeight="100vh">
+    <Box bgcolor={isBgBlack ? 'common.black' : ''}>
       <Hidden mdDown>
         <Box
           component="header"
-          position="fixed"
+          position={currentCategory === 'home' ? 'fixed' : 'sticky'}
           top={0}
           right={0}
           left={0}
@@ -31,9 +33,7 @@ const Layout: FC<Props> = ({ children, currentCategory }) => {
           </Container>
         </Box>
       </Hidden>
-      <Box component="main" flex="1 1 auto">
-        {children}
-      </Box>
+      <Box component="main">{children}</Box>
       <Hidden mdUp>
         <Box
           position="fixed"

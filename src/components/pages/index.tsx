@@ -14,10 +14,14 @@ import CategoryHeading from 'components/ui/CategoryHeading/';
 import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
+import { Work } from 'domains/local/models/works';
+import { Blogs } from 'domains/microCMS/models/blog';
 
 import 'swiper/css';
 
-type Props = {
+type StaticProps = { blogs: Blogs; works: Work[] };
+
+type Props = StaticProps & {
   isInViewAbout: boolean;
   isInViewBlog: boolean;
   isInViewWorks: boolean;
@@ -25,11 +29,20 @@ type Props = {
 };
 
 const Home: FC<Props> = ({
+  blogs,
+  works,
   isInViewAbout,
   isInViewBlog,
   isInViewWorks,
   handleInView,
 }) => {
+  const pics = works.map((w) => ({
+    id: w.id,
+    title: w.title,
+    src: `/assets/works/${w.id}/image/${w.main}`,
+    href: `/works/${w.id}`,
+  }));
+
   return (
     <>
       <Head>
@@ -37,7 +50,11 @@ const Home: FC<Props> = ({
         <meta name="description" content="南進之介のWebサイト" />
       </Head>
       <HomeSection isFilterBlur={isInViewAbout} zIndex={0}>
-        <Box position="relative" minHeight="100vh" bgcolor="common.black">
+        <Box
+          position="relative"
+          minHeight="calc(100vh - env(safe-area-inset-bottom))"
+          bgcolor="common.black"
+        >
           <Image
             src="/assets/image/mv.jpg"
             alt=""
@@ -132,45 +149,21 @@ const Home: FC<Props> = ({
             </Box>
             <Box mb={4} gridArea="slider">
               <SwiperWrapper>
-                <SwiperSlide tag="li">
-                  {({ isActive }) => (
-                    <ArticleCard
-                      title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                      description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                      date={new Date()}
-                      category="Category"
-                      src="/assets/image/profile.png"
-                      href="test"
-                      disabled={!isActive}
-                    />
-                  )}
-                </SwiperSlide>
-                <SwiperSlide tag="li">
-                  {({ isActive }) => (
-                    <ArticleCard
-                      title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                      description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                      date={new Date()}
-                      category="Category"
-                      src="/assets/image/profile.png"
-                      href="test"
-                      disabled={!isActive}
-                    />
-                  )}
-                </SwiperSlide>
-                <SwiperSlide tag="li">
-                  {({ isActive }) => (
-                    <ArticleCard
-                      title="記事タイトル記事タイトル記事記事タイトル記事タイトル"
-                      description="本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                      date={new Date()}
-                      category="Category"
-                      src="/assets/image/profile.png"
-                      href="test"
-                      disabled={!isActive}
-                    />
-                  )}
-                </SwiperSlide>
+                {blogs.contents.map((b) => (
+                  <SwiperSlide key={b.id} tag="li">
+                    {({ isActive }) => (
+                      <ArticleCard
+                        title={b.title}
+                        description="ここのテキストは静的 本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
+                        date={b.publishedAt}
+                        category={b.category[0]}
+                        src={b.thumbnail.url}
+                        href={`/blog/${b.id}`}
+                        disabled={!isActive}
+                      />
+                    )}
+                  </SwiperSlide>
+                ))}
               </SwiperWrapper>
             </Box>
             <Box px={1} textAlign="center" gridArea="btn">
@@ -187,7 +180,6 @@ const Home: FC<Props> = ({
         section="works"
         isFilterBlur={false}
         zIndex={3}
-        isLastSection
         handleInView={handleInView}
       >
         <Box
@@ -221,46 +213,7 @@ const Home: FC<Props> = ({
                 maxWidth={{ xs: 600, md: 'none' }}
                 gridArea="pic"
               >
-                <PicGrid
-                  pics={[
-                    {
-                      id: '1',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '2',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '3',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '4',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '5',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                    {
-                      id: '6',
-                      title: 'testこれはdummyダミーテキスト',
-                      src: '/assets/image/profile.png',
-                      href: '/',
-                    },
-                  ]}
-                />
+                <PicGrid pics={pics} />
               </Box>
               <Box textAlign="center" gridArea="btn">
                 <Link href="/works" passHref>
@@ -277,7 +230,7 @@ const Home: FC<Props> = ({
   );
 };
 
-const EnhancedHome: FC = () => {
+const EnhancedHome: FC<StaticProps> = ({ blogs, works }) => {
   const [isInViewAbout, setIsInViewAbout] = useState(false);
   const [isInViewBlog, setIsInViewBlog] = useState(false);
   const [isInViewWorks, setIsInViewWorks] = useState(false);
@@ -299,7 +252,16 @@ const EnhancedHome: FC = () => {
   };
 
   return (
-    <Home {...{ isInViewAbout, isInViewBlog, isInViewWorks, handleInView }} />
+    <Home
+      {...{
+        blogs,
+        works,
+        isInViewAbout,
+        isInViewBlog,
+        isInViewWorks,
+        handleInView,
+      }}
+    />
   );
 };
 
