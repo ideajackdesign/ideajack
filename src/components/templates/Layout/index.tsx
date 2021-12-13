@@ -16,8 +16,10 @@ const Layout: FC<Props> = ({ children, currentCategory }) => {
       <Hidden mdDown>
         <Box
           component="header"
-          position="sticky"
+          position={currentCategory === 'home' ? 'fixed' : 'sticky'}
           top={0}
+          right={0}
+          left={0}
           zIndex="appBar"
           bgcolor="rgba(0,0,0,0.75)"
           sx={{
