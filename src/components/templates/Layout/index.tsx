@@ -9,15 +9,15 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children, currentCategory }) => {
+  const isBgBlack = ['home', 'about'].includes(currentCategory);
+
   return (
-    <Box>
+    <Box bgcolor={isBgBlack ? 'common.black' : ''}>
       <Hidden mdDown>
         <Box
           component="header"
-          position="fixed"
+          position="sticky"
           top={0}
-          right={0}
-          left={0}
           zIndex="appBar"
           bgcolor="rgba(0,0,0,0.75)"
           sx={{

@@ -42,11 +42,11 @@ const Detail: FC<Props> = ({ work }) => {
           </Container>
         </Box>
       </Hidden>
-      <Box pb={15} bgcolor="common.white">
+      <Box pt={{ md: 2 }} pb={15} bgcolor="common.white">
         <Container>
           <Box
             display="flex"
-            gap={2}
+            gap={{ xs: 3, md: 2 }}
             flexDirection={{ xs: 'column', md: 'row' }}
           >
             <Box flex={{ md: '2 1 0' }}>
