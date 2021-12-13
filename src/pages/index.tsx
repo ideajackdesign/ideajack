@@ -16,7 +16,7 @@ export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
   const blogs = await getAllBlogs({ limit: '5' });
-  const works = getAllWorks();
+  const works = getAllWorks(6);
 
   return {
     props: {

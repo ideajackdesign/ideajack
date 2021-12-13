@@ -5,10 +5,10 @@ import { Work } from 'domains/local/models/works';
 
 const worksDir = path.join(process.cwd(), 'public/assets/works');
 
-export const getAllWorks = (): Work[] => {
+export const getAllWorks = (limit?: number): Work[] => {
   const dirs = fs.readdirSync(worksDir);
 
-  return dirs.map((d) => {
+  const works = dirs.map((d) => {
     const targetDir = path.join(worksDir, d);
     const json = JSON.parse(
       fs.readFileSync(`${targetDir}/index.json`, 'utf-8')
@@ -17,6 +17,8 @@ export const getAllWorks = (): Work[] => {
 
     return { ...json, id: d, images: imgFileNames };
   });
+
+  return limit ? works.slice(0, limit) : works;
 };
 
 export const getWork = (id: string): Work => {
