@@ -5,6 +5,7 @@ import { FC, useMemo, useState } from 'react';
 import Container from 'components/templates/Container/';
 import ArticleCard from 'components/ui/ArticleCard/';
 import CategoryHeading from 'components/ui/CategoryHeading/';
+import Loading from 'components/ui/Loading/';
 import { Blogs } from 'domains/microCMS/models/blog';
 import { filterHtmlTag } from 'helpers/filterHtmlTag';
 import useBlogs from 'hooks/useBlogs';
@@ -76,7 +77,7 @@ const Blog: FC<Props> = ({ blogs, page, handleChangePage }) => {
 
 const EnhancedBlog: FC = () => {
   const [page, setPage] = useState(1);
-  const { blogs } = useBlogs({
+  const { blogs, error } = useBlogs({
     limit: LIMIT.toString(),
     offset: (LIMIT * (page - 1)).toString(),
   });
@@ -88,7 +89,8 @@ const EnhancedBlog: FC = () => {
     }
   };
 
-  if (!blogs) return <></>;
+  if (error) return <div>failed to load</div>;
+  if (!blogs) return <Loading />;
 
   return <Blog blogs={blogs} page={page} handleChangePage={handleChangePage} />;
 };
