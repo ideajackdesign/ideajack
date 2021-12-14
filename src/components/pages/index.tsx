@@ -67,6 +67,7 @@ const Home: FC<Props> = ({
               layout="fill"
               objectFit="contain"
               objectPosition="top"
+              priority
             />
           </Box>
         </Box>
