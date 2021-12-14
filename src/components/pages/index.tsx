@@ -15,11 +15,12 @@ import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
 import { Work } from 'domains/local/models/works';
+import { About } from 'domains/microCMS/models/about';
 import { Blogs } from 'domains/microCMS/models/blog';
 
 import 'swiper/css';
 
-type StaticProps = { blogs: Blogs; works: Work[] };
+type StaticProps = { about: About; blogs: Blogs; works: Work[] };
 
 type Props = StaticProps & {
   isInViewAbout: boolean;
@@ -29,6 +30,7 @@ type Props = StaticProps & {
 };
 
 const Home: FC<Props> = ({
+  about,
   blogs,
   works,
   isInViewAbout,
@@ -81,18 +83,11 @@ const Home: FC<Props> = ({
             gridArea="profile"
           >
             <Profile
-              profileItems={[
-                {
-                  id: 0,
-                  title: 'Name',
-                  description: 'Shinnosuke Minami',
-                },
-                {
-                  id: 1,
-                  title: 'Age',
-                  description: 29,
-                },
-              ]}
+              profileItems={about.contents.map((a) => ({
+                id: a.id,
+                title: a.title,
+                description: a.description,
+              }))}
             />
           </Box>
           <Box textAlign="center" gridArea="btn">
@@ -230,7 +225,7 @@ const Home: FC<Props> = ({
   );
 };
 
-const EnhancedHome: FC<StaticProps> = ({ blogs, works }) => {
+const EnhancedHome: FC<StaticProps> = ({ about, blogs, works }) => {
   const [isInViewAbout, setIsInViewAbout] = useState(false);
   const [isInViewBlog, setIsInViewBlog] = useState(false);
   const [isInViewWorks, setIsInViewWorks] = useState(false);
@@ -254,6 +249,7 @@ const EnhancedHome: FC<StaticProps> = ({ blogs, works }) => {
   return (
     <Home
       {...{
+        about,
         blogs,
         works,
         isInViewAbout,
