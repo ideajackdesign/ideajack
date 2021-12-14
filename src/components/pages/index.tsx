@@ -52,18 +52,22 @@ const Home: FC<Props> = ({
         <meta name="description" content="南進之介のWebサイト" />
       </Head>
       <HomeSection isFilterBlur={isInViewAbout} zIndex={0}>
-        <Box
-          position="relative"
-          minHeight="calc(100vh - env(safe-area-inset-bottom))"
-          bgcolor="common.black"
-        >
-          <Image
-            src="/assets/image/mv.jpg"
-            alt=""
-            layout="fill"
-            objectFit="contain"
-            objectPosition="top"
-          />
+        <Box pb={{ xs: 15, xd: 0 }} bgcolor="common.black">
+          <Box
+            position="relative"
+            minHeight={{
+              xs: 'calc(100vh - env(safe-area-inset-bottom) - 120px)',
+              md: 'calc(100vh - env(safe-area-inset-bottom))',
+            }}
+          >
+            <Image
+              src="/assets/image/mv.jpg"
+              alt=""
+              layout="fill"
+              objectFit="contain"
+              objectPosition="top"
+            />
+          </Box>
         </Box>
       </HomeSection>
       <HomeSection
