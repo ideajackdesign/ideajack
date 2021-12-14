@@ -1,4 +1,4 @@
-import { Box, Button, Theme } from '@mui/material';
+import { Box, Button, Typography, Theme } from '@mui/material';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -148,23 +148,27 @@ const Home: FC<Props> = ({
               <CategoryHeading titleEng="Blog" titleJpn="記録" />
             </Box>
             <Box mb={4} gridArea="slider">
-              <SwiperWrapper>
-                {blogs.contents.map((b) => (
-                  <SwiperSlide key={b.id} tag="li">
-                    {({ isActive }) => (
-                      <ArticleCard
-                        title={b.title}
-                        description={filterHtmlTag(b.content)}
-                        date={b.publishedAt}
-                        category={b.category[0]}
-                        src={b.thumbnail.url}
-                        href={`/blog/${b.id}`}
-                        disabled={!isActive}
-                      />
-                    )}
-                  </SwiperSlide>
-                ))}
-              </SwiperWrapper>
+              {(blogs.contents.length === 0 && (
+                <Typography>投稿はありませんでした。</Typography>
+              )) || (
+                <SwiperWrapper>
+                  {blogs.contents.map((b) => (
+                    <SwiperSlide key={b.id} tag="li">
+                      {({ isActive }) => (
+                        <ArticleCard
+                          title={b.title}
+                          description={filterHtmlTag(b.content)}
+                          date={b.publishedAt}
+                          category={b.category[0]}
+                          src={b.thumbnail.url}
+                          href={`/blog/${b.id}`}
+                          disabled={!isActive}
+                        />
+                      )}
+                    </SwiperSlide>
+                  ))}
+                </SwiperWrapper>
+              )}
             </Box>
             <Box px={1} textAlign="center" gridArea="btn">
               <Link href="/blog" passHref>

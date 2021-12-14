@@ -147,6 +147,13 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+        },
+      },
+    },
   },
 });
 

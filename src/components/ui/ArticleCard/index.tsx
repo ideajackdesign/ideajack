@@ -86,7 +86,7 @@ const ArticleCard: FC<Props> = ({
                 <Box component="time">{filterDate({ date })}</Box>
               </Typography>
             </Box>
-            <Box order={2}>
+            <Box order={2} minHeight="52.5px">
               <TypographyRowControl
                 maxRow={2}
                 typographyProps={{
