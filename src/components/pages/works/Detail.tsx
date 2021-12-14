@@ -25,7 +25,7 @@ const Detail: FC<Props> = ({ work }) => {
   return (
     <>
       <Head>
-        <title>{`${work.title} | work | minami web site`}</title>
+        <title>{`${work.title} | works | minami web site`}</title>
         <meta
           name="description"
           content={`南進之介のWebサイト ${work.title}`}
@@ -36,7 +36,7 @@ const Detail: FC<Props> = ({ work }) => {
           <Container>
             <Link href="/works" passHref>
               <Button variant="text" component="a" startIcon={<ArrowLeft />}>
-                work
+                Works
               </Button>
             </Link>
           </Container>

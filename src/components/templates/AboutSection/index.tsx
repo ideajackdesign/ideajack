@@ -38,7 +38,6 @@ const AboutSection: FC = ({ children }) => {
                 display="flex"
                 alignItems="flex-end"
                 minHeight={{ md: '100vh' }}
-                pt={5}
                 bgcolor="common.white"
                 flex="1 1 55%"
                 sx={(theme: Theme) => ({
@@ -79,7 +78,7 @@ const AboutSection: FC = ({ children }) => {
                   maxWidth={{ xs: '250px', md: '600px' }}
                   mx="auto"
                   mb={{ md: '100px' }}
-                  pl={{ xs: '40px', md: '140px' }}
+                  pl={{ xs: '24px', md: '140px' }}
                   boxSizing="content-box"
                 >
                   <Image

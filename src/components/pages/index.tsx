@@ -1,4 +1,4 @@
-import { Box, Button, Theme } from '@mui/material';
+import { Box, Button, Typography, Theme } from '@mui/material';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,11 +15,13 @@ import PicGrid from 'components/ui/PicGrid/';
 import Profile from 'components/ui/Profile/';
 import SwiperWrapper from 'components/ui/SwiperWrapper/';
 import { Work } from 'domains/local/models/works';
+import { About } from 'domains/microCMS/models/about';
 import { Blogs } from 'domains/microCMS/models/blog';
+import { filterHtmlTag } from 'helpers/filterHtmlTag';
 
 import 'swiper/css';
 
-type StaticProps = { blogs: Blogs; works: Work[] };
+type StaticProps = { about: About; blogs: Blogs; works: Work[] };
 
 type Props = StaticProps & {
   isInViewAbout: boolean;
@@ -29,6 +31,7 @@ type Props = StaticProps & {
 };
 
 const Home: FC<Props> = ({
+  about,
   blogs,
   works,
   isInViewAbout,
@@ -50,18 +53,23 @@ const Home: FC<Props> = ({
         <meta name="description" content="南進之介のWebサイト" />
       </Head>
       <HomeSection isFilterBlur={isInViewAbout} zIndex={0}>
-        <Box
-          position="relative"
-          minHeight="calc(100vh - env(safe-area-inset-bottom))"
-          bgcolor="common.black"
-        >
-          <Image
-            src="/assets/image/mv.jpg"
-            alt=""
-            layout="fill"
-            objectFit="contain"
-            objectPosition="top"
-          />
+        <Box pb={{ xs: 15, xd: 0 }} bgcolor="common.black">
+          <Box
+            position="relative"
+            minHeight={{
+              xs: 'calc(100vh - env(safe-area-inset-bottom) - 120px)',
+              md: 'calc(100vh - env(safe-area-inset-bottom))',
+            }}
+          >
+            <Image
+              src="/assets/image/mv.jpg"
+              alt=""
+              layout="fill"
+              objectFit="contain"
+              objectPosition="top"
+              priority
+            />
+          </Box>
         </Box>
       </HomeSection>
       <HomeSection
@@ -81,18 +89,11 @@ const Home: FC<Props> = ({
             gridArea="profile"
           >
             <Profile
-              profileItems={[
-                {
-                  id: 0,
-                  title: 'Name',
-                  description: 'Shinnosuke Minami',
-                },
-                {
-                  id: 1,
-                  title: 'Age',
-                  description: 29,
-                },
-              ]}
+              profileItems={about.contents.map((a) => ({
+                id: a.id,
+                title: a.title,
+                description: a.description,
+              }))}
             />
           </Box>
           <Box textAlign="center" gridArea="btn">
@@ -148,23 +149,27 @@ const Home: FC<Props> = ({
               <CategoryHeading titleEng="Blog" titleJpn="記録" />
             </Box>
             <Box mb={4} gridArea="slider">
-              <SwiperWrapper>
-                {blogs.contents.map((b) => (
-                  <SwiperSlide key={b.id} tag="li">
-                    {({ isActive }) => (
-                      <ArticleCard
-                        title={b.title}
-                        description="ここのテキストは静的 本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
-                        date={b.publishedAt}
-                        category={b.category[0]}
-                        src={b.thumbnail.url}
-                        href={`/blog/${b.id}`}
-                        disabled={!isActive}
-                      />
-                    )}
-                  </SwiperSlide>
-                ))}
-              </SwiperWrapper>
+              {(blogs.contents.length === 0 && (
+                <Typography>投稿はありませんでした。</Typography>
+              )) || (
+                <SwiperWrapper>
+                  {blogs.contents.map((b) => (
+                    <SwiperSlide key={b.id} tag="li">
+                      {({ isActive }) => (
+                        <ArticleCard
+                          title={b.title}
+                          description={filterHtmlTag(b.content)}
+                          date={b.publishedAt}
+                          category={b.category[0]}
+                          src={b.thumbnail.url}
+                          href={`/blog/${b.id}`}
+                          disabled={!isActive}
+                        />
+                      )}
+                    </SwiperSlide>
+                  ))}
+                </SwiperWrapper>
+              )}
             </Box>
             <Box px={1} textAlign="center" gridArea="btn">
               <Link href="/blog" passHref>
@@ -230,7 +235,7 @@ const Home: FC<Props> = ({
   );
 };
 
-const EnhancedHome: FC<StaticProps> = ({ blogs, works }) => {
+const EnhancedHome: FC<StaticProps> = ({ about, blogs, works }) => {
   const [isInViewAbout, setIsInViewAbout] = useState(false);
   const [isInViewBlog, setIsInViewBlog] = useState(false);
   const [isInViewWorks, setIsInViewWorks] = useState(false);
@@ -254,6 +259,7 @@ const EnhancedHome: FC<StaticProps> = ({ blogs, works }) => {
   return (
     <Home
       {...{
+        about,
         blogs,
         works,
         isInViewAbout,

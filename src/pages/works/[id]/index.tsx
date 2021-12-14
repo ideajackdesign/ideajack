@@ -20,7 +20,6 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
     props: {
       work,
     },
-    revalidate: 10,
   };
 };
 

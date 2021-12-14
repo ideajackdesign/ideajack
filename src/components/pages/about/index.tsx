@@ -5,8 +5,11 @@ import { FC } from 'react';
 import AboutSection from 'components/templates/AboutSection/';
 import CategoryHeading from 'components/ui/CategoryHeading/';
 import Profile from 'components/ui/Profile/';
+import { About as AboutType, AboutItem } from 'domains/microCMS/models/about';
 
-const About: FC = ({}) => {
+type Props = { about: AboutType; profile: AboutItem | undefined };
+
+const About: FC<Props> = ({ about, profile }) => {
   return (
     <>
       <Head>
@@ -22,25 +25,18 @@ const About: FC = ({}) => {
         </Box>
         <Box mb={4} mx="auto" maxWidth="632px">
           <Profile
-            profileItems={[
-              {
-                id: 0,
-                title: 'Name',
-                description: 'Shinnosuke Minami',
-              },
-              {
-                id: 1,
-                title: 'Age',
-                description: 29,
-              },
-            ]}
+            profileItems={about.contents.map((a) => ({
+              id: a.id,
+              title: a.title,
+              description: a.description,
+            }))}
           />
         </Box>
-        <Box mx="auto" maxWidth="500px">
-          <Typography>
-            南くんのプロフィール文章がなにか入る。南くんのプロフィール文章がなにか入る。南くんのプロフィール文章がなにか入る。南くんのプロフィール文章がなにか入る。南くんのプロフィール文章がなにか入る。南くんのプロフィール文章がなにか入る。南くんのプロフィール文章がなにか入る。
-          </Typography>
-        </Box>
+        {profile && (
+          <Box mx="auto" maxWidth="500px">
+            <Typography>{profile.description}</Typography>
+          </Box>
+        )}
       </AboutSection>
     </>
   );

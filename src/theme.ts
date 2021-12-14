@@ -93,8 +93,8 @@ theme = createTheme(theme, {
     MuiButton: {
       defaultProps: {
         variant: 'outlined',
-        disableelevation: true,
-        disableFocusRipple: true,
+        disableelevation: 'true',
+        disablefocusripple: 'true',
         disableRipple: true,
       },
       styleOverrides: {
@@ -113,8 +113,8 @@ theme = createTheme(theme, {
     },
     MuiButtonBase: {
       defaultProps: {
-        disableelevation: true,
-        disableFocusRipple: true,
+        disableelevation: 'true',
+        disablefocusripple: 'true',
         disableRipple: true,
       },
     },
@@ -144,6 +144,13 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           fontSize: theme.typography.pxToRem(16),
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
         },
       },
     },

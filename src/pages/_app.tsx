@@ -12,7 +12,6 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();
   const currentCategory = checkCategory(pathname);
 
-  // const currentCategory = pathname
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

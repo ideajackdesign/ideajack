@@ -7,9 +7,12 @@ const BASE_ENDPOINT = process.env.NEXT_PUBLIC_MICRO_CMS_BASE_ENDPOINT || '';
 
 type Query = {
   limit: string;
+  offset: string;
 };
 
-const useBlogs = (query?: Query) => {
+const useBlogs = (
+  query?: Query
+): { blogs: Blogs | undefined; error: Error | undefined } => {
   const q = query ? `?${new URLSearchParams(query).toString()}` : '';
 
   const { data, error } = useSWR<Blogs, Error>(
@@ -17,14 +20,7 @@ const useBlogs = (query?: Query) => {
     fetcher
   );
 
-  if (error) {
-    return { isError: true };
-  }
-  if (!data) {
-    return { isLoading: true };
-  }
-
-  return { blogs: data };
+  return { blogs: data, error };
 };
 
 export default useBlogs;
