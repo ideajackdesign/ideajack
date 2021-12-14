@@ -17,6 +17,7 @@ import SwiperWrapper from 'components/ui/SwiperWrapper/';
 import { Work } from 'domains/local/models/works';
 import { About } from 'domains/microCMS/models/about';
 import { Blogs } from 'domains/microCMS/models/blog';
+import { filterHtmlTag } from 'helpers/filterHtmlTag';
 
 import 'swiper/css';
 
@@ -153,7 +154,7 @@ const Home: FC<Props> = ({
                     {({ isActive }) => (
                       <ArticleCard
                         title={b.title}
-                        description="ここのテキストは静的 本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
+                        description={filterHtmlTag(b.content)}
                         date={b.publishedAt}
                         category={b.category[0]}
                         src={b.thumbnail.url}

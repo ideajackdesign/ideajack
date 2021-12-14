@@ -6,6 +6,7 @@ import Container from 'components/templates/Container/';
 import ArticleCard from 'components/ui/ArticleCard/';
 import CategoryHeading from 'components/ui/CategoryHeading/';
 import { Blogs } from 'domains/microCMS/models/blog';
+import { filterHtmlTag } from 'helpers/filterHtmlTag';
 import useBlogs from 'hooks/useBlogs';
 
 type Props = { blogs: Blogs };
@@ -31,7 +32,7 @@ const Blog: FC<Props> = ({ blogs }) => {
               <Box key={b.id} component="li">
                 <ArticleCard
                   title={b.title}
-                  description="ここのテキストは静的 本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文テキスト本文"
+                  description={filterHtmlTag(b.content)}
                   date={b.publishedAt}
                   category={b.category[0]}
                   src={b.thumbnail.url}
