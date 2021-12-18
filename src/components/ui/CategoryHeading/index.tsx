@@ -24,7 +24,6 @@ const CategoryHeading: FC<Props> = ({ titleEng, titleJpn }) => {
           gridColumn="1 / 2"
           gridRow="1 / 2"
           textAlign="right"
-          color="primary.main"
           fontSize={{
             xs: theme.typography.pxToRem(36),
             md: theme.typography.pxToRem(56),

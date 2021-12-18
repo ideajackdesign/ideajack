@@ -52,7 +52,7 @@ const Navigation: FC<Props> = ({ currentCategory }) => {
                   px={{ xs: 0.5, md: 3 }}
                   py={{ xs: 0.5, md: 1.5 }}
                   bgcolor={{
-                    md: i.category === currentCategory ? 'primary.main' : '',
+                    md: i.category === currentCategory ? 'common.white' : '',
                   }}
                   textAlign="center"
                   color={{
@@ -60,7 +60,10 @@ const Navigation: FC<Props> = ({ currentCategory }) => {
                       i.category === currentCategory
                         ? 'primary.light'
                         : 'common.white',
-                    md: 'common.white',
+                    md:
+                      i.category === currentCategory
+                        ? 'common.black'
+                        : 'common.white',
                   }}
                 >
                   <Hidden mdUp>
