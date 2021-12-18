@@ -103,10 +103,11 @@ const Home: FC<Props> = ({
                 color="inherit"
                 endIcon={<Arrow />}
                 sx={{
+                  color: 'common.white',
+                  borderColor: 'common.white',
                   '&:hover, &:focus': {
-                    borderColor: 'common.white',
                     backgroundColor: 'common.white',
-                    color: 'primary.main',
+                    color: 'common.black',
                   },
                 }}
               >
@@ -173,7 +174,7 @@ const Home: FC<Props> = ({
             </Box>
             <Box px={1} textAlign="center" gridArea="btn">
               <Link href="/blog" passHref>
-                <Button component="a" color="primary" endIcon={<Arrow />}>
+                <Button component="a" endIcon={<Arrow />}>
                   Blog
                 </Button>
               </Link>
@@ -222,7 +223,7 @@ const Home: FC<Props> = ({
               </Box>
               <Box textAlign="center" gridArea="btn">
                 <Link href="/works" passHref>
-                  <Button component="a" color="primary" endIcon={<Arrow />}>
+                  <Button component="a" endIcon={<Arrow />}>
                     Works
                   </Button>
                 </Link>

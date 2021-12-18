@@ -103,9 +103,15 @@ theme = createTheme(theme, {
           borderRadius: 0,
           padding: '4px 20px',
         },
-        outlinedPrimary: {
+        text: {
+          color: theme.palette.common.black,
+        },
+        outlined: {
+          borderColor: theme.palette.common.black,
+          color: theme.palette.common.black,
           '&:hover, &:focus': {
-            backgroundColor: theme.palette.primary.main,
+            borderColor: theme.palette.common.black,
+            backgroundColor: theme.palette.common.black,
             color: theme.palette.common.white,
           },
         },
